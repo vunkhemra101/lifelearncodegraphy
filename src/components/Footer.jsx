@@ -40,7 +40,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-card-border/40 text-center text-xs text-muted/60">
-        © {CURRENT_YEAR} All Rights Reserved. Crafted with React &amp; Tailwind CSS.
+        © {CURRENT_YEAR} Powered by vunkhemra.
+        
       </div>
     </footer>
   );

@@ -3,16 +3,17 @@ export default function HeroSection() {
     <section className="relative pt-12 pb-20 md:pt-20 md:pb-32 px-6 md:px-10 max-w-7xl mx-auto">
       {/* Availability Pill */}
       <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card-bg border border-card-border mb-8 backdrop-blur-sm animate-fade-in">
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+        {/* <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" /> */}
         <span className="text-xs uppercase tracking-widest text-cream font-medium">
-          Available for Select Projects &amp; Commissions
+          welcome to lifelearncodegraphy.
         </span>
       </div>
 
       {/* Main Headline */}
       <div className="max-w-4xl">
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] uppercase text-cream mb-6">
-          Graphic Designer &amp; Illustrator
+          Programmer &amp; videography.
+          
         </h1>
         <p className="text-muted text-lg sm:text-xl md:text-2xl font-light leading-relaxed max-w-2xl mb-10">
           Transforming concepts into striking visual identities, expressive typography, and evocative digital artwork that resonates across print and screen.

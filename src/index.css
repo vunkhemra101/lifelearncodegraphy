@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Dangrek&display=swap");
 @import "tailwindcss";
 
 /* ── Custom theme tokens (Tailwind v4) ── */
@@ -13,6 +14,8 @@
   /* Font families */
   --font-display: "Anton", "Bebas Neue", Impact, sans-serif;
   --font-body: "DM Sans", system-ui, sans-serif;
+  --font-audiowide: "Audiowide", sans-serif;
+  --font-dangrek: "Dangrek", sans-serif;
 
   /* Custom keyframes for animated background glows */
   --animate-glow-1: glow-1 7s ease-in-out infinite alternate;

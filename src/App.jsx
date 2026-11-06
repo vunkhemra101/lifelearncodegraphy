@@ -40,7 +40,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-cream font-body selection:bg-cream selection:text-navy-deep relative">
+    <div className="min-h-screen text-cream font-body selection:bg-cream selection:text-navy-deep relative pt-16 sm:pt-20 overflow-x-clip">
       <NetworkBackground />
       <Navbar />
 
