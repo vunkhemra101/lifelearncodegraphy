@@ -9,12 +9,12 @@ export default function Footer() {
     <footer className="border-t border-card-border/80 bg-navy-deep/80 py-12 px-6 md:px-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          <span className="font-display text-cream text-lg tracking-wider uppercase">
-            YOUR NAME
+          <span className="font-audiowide text-cream text-lg tracking-wider uppercase">
+            lifelearncodegraphy
           </span>
           <span className="hidden sm:inline text-card-border">•</span>
           <span className="text-xs text-muted">
-            Graphic Designer &amp; Illustrator Portfolio
+            Programmer &amp; videography.
           </span>
         </div>
 
@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
       <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-card-border/40 text-center text-xs text-muted/60">
         © {CURRENT_YEAR} Powered by vunkhemra.
-        
+
       </div>
     </footer>
   );
