@@ -19,7 +19,7 @@ export default function AboutSection() {
             01 / Background
           </span>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-cream uppercase tracking-tight mb-6 leading-none">
-            Design With Purpose &amp; Soul
+            Coding With Real &amp; Editing
           </h2>
           <div className="w-16 h-1 bg-cream/30 rounded-full mb-8" />
 

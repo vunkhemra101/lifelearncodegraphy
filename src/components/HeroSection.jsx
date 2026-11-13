@@ -1,6 +1,31 @@
-import heroImg from "../assets/image.png";
+import { useState, useEffect } from "react";
+import foldedImg from "../assets/image.png";
+import normalImg from "../assets/image-normal.png";
 
 export default function HeroSection() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Progress from 0 (normal pose) to 1 (folded arms) over 140px of scroll
+          const scrollY = window.scrollY;
+          const threshold = 140;
+          const p = Math.min(Math.max(scrollY / threshold, 0), 1);
+          setScrollProgress(p);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="relative pt-6 sm:pt-10 md:pt-14 pb-16 md:pb-24 px-6 md:px-10 max-w-7xl mx-auto">
       {/* Hero Top: 2-Column Responsive Layout */}
@@ -17,14 +42,14 @@ export default function HeroSection() {
           {/* Main Headline */}
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.92] uppercase text-cream mb-6">
             Programmer &amp;
-            <span className="block">videography.</span>
+            <span className="block">photography.</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-muted text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-xl mb-8 sm:mb-10">
-            Transforming concepts into striking visual identities, expressive typography, and evocative digital artwork that resonates across print and screen.
+            Welcome to my website. Everything here reflects my personal experiences, as well as various projects I have developed through self-study, research, and personal interests. Currently, I am a university student.
           </p>
-
+    
           {/* Call to Actions */}
           <div className="flex flex-wrap items-center gap-4">
             <a
@@ -46,16 +71,34 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Person Image */}
+        {/* Right Column: Person Image with Scroll-Driven Pose Animation */}
         <div className="lg:col-span-5 flex justify-center lg:justify-end items-end relative mt-8 lg:mt-0">
           {/* Subtle Ambient Radial Glow behind the cutout */}
           <div className="absolute inset-0 bg-cyan-400/10 blur-3xl rounded-full -z-10 scale-95 pointer-events-none" />
 
-          <img
-            src={heroImg}
-            alt="Programmer & Videographer"
-            className="w-auto max-h-[380px] sm:max-h-[460px] md:max-h-[500px] lg:max-h-[540px] xl:max-h-[580px] object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)] select-none pointer-events-none"
-          />
+          <div className="relative flex justify-center lg:justify-end items-end select-none">
+            {/* Normal Standing Pose (Initial State - Arms at sides) */}
+            <img
+              src={normalImg}
+              alt="Programmer - Standing Pose"
+              style={{
+                opacity: 1 - scrollProgress,
+                transform: `scale(${1 + scrollProgress * 0.012})`,
+              }}
+              className="w-auto max-h-[380px] sm:max-h-[460px] md:max-h-[500px] lg:max-h-[540px] xl:max-h-[580px] object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)] pointer-events-none transition-all duration-150 ease-out"
+            />
+
+            {/* Folded Arms Pose (Action performed as you scroll) */}
+            <img
+              src={foldedImg}
+              alt="Programmer - Arms Folded"
+              style={{
+                opacity: scrollProgress,
+                transform: `scale(${0.988 + scrollProgress * 0.012}) translateY(${(1 - scrollProgress) * 6}px)`,
+              }}
+              className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)] pointer-events-none transition-all duration-150 ease-out"
+            />
+          </div>
         </div>
       </div>
 
