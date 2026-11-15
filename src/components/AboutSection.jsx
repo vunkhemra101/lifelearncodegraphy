@@ -1,13 +1,13 @@
 export default function AboutSection() {
   const tools = [
-    "Adobe Illustrator",
+    // "Adobe Illustrator",
     "Adobe Photoshop",
     "Adobe InDesign",
-    "Procreate",
+    // "Procreate",
     "Figma",
     "Screen Printing",
-    "Color Theory",
-    "Art Direction",
+    // "Color Theory",
+    // "Art Direction",
   ];
 
   return (

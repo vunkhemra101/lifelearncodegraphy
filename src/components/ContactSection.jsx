@@ -69,7 +69,7 @@ export default function ContactSection({ selectedProject }) {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const email = "hello@designerportfolio.art";
+  const email = "vunkhemracodegraphy@email.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -223,7 +223,7 @@ export default function ContactSection({ selectedProject }) {
                       id="name"
                       type="text"
                       required
-                      placeholder="Jane Doe"
+                      placeholder="Full Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-lg bg-navy-deep/80 border border-card-border text-cream placeholder-muted/40 focus:border-cream focus:outline-none transition-colors text-sm"
@@ -237,7 +237,7 @@ export default function ContactSection({ selectedProject }) {
                       id="email"
                       type="email"
                       required
-                      placeholder="jane@example.com"
+                      placeholder="yourname123@gmail.com"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       className="w-full px-4 py-3 rounded-lg bg-navy-deep/80 border border-card-border text-cream placeholder-muted/40 focus:border-cream focus:outline-none transition-colors text-sm"

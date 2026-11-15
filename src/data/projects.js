@@ -1,13 +1,13 @@
 export const projects = [
-  {
-    id: 1,
-    title: "Dreamscape",
-    category: "Illustration",
-    description:
-      "A surreal digital illustration exploring the boundaries between reality and imagination. Created with layered textures and a vibrant color palette to evoke a sense of wonder.",
-    color: "#1a8a7d",
-    image: null,
-  },
+//   {
+//     id: 1,
+//     title: "Dreamscape",
+//     category: "Illustration",
+//     description:
+//       "A surreal digital illustration exploring the boundaries between reality and imagination. Created with layered textures and a vibrant color palette to evoke a sense of wonder.",
+//     color: "#1a8a7d",
+//     image: null,
+//   },
   {
     id: 2,
     title: "Serif & Soul",
@@ -89,4 +89,20 @@ export const projects = [
     color: "#f59e0b",
     image: null,
   },
+//   {
+//     id: 10,
+//     title: "Launch Day",
+//     category: "Promotional Content",
+//     description:
+//       "Multi-platform promotional campaign including social media banners, email headers, and web hero graphics for a product launch event.",
+//     color: "#f59e0b",
+//     image: null,
+//   },
+//   {
+//     id: 11,
+//     title: "Projects Team Works",
+//     category: "Visual Studio Code",
+//     color:null,
+//     image:null,
+//   }
 ];

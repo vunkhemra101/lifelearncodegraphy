@@ -141,7 +141,6 @@ export default function ProjectArt({ project, className = "" }) {
             <line x1="250" y1="35" x2="225" y2="65" stroke="#f3ecd2" strokeWidth="3" strokeLinecap="round" />
           </svg>
         );
-
       default:
         return (
           <div
