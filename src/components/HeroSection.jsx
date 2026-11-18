@@ -28,7 +28,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative pt-6 sm:pt-10 md:pt-14 pb-16 md:pb-24 px-6 md:px-10 max-w-7xl mx-auto">
+    <section id="home" className="relative pt-6 sm:pt-10 md:pt-14 pb-16 md:pb-24 px-6 md:px-10 max-w-7xl mx-auto">
       {/* Hero Top: 2-Column Responsive Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
         {/* Left Column: Text & CTAs */}
@@ -50,7 +50,7 @@ export default function HeroSection() {
           <p className="text-muted text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-xl mb-8 sm:mb-10">
             Welcome to my website. Everything here reflects my personal experiences, as well as various projects I have developed through self-study, research, and personal interests. Currently, I am a university student.
           </p>
-    
+
           {/* Call to Actions */}
           <div className="flex flex-wrap items-center gap-4">
             <a
@@ -91,15 +91,15 @@ export default function HeroSection() {
         </div>
         <div>
           <span className="block text-2xl sm:text-3xl font-display text-cream">02</span>
-          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Custom Typography</span>
+          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Photographer</span>
         </div>
         <div>
           <span className="block text-2xl sm:text-3xl font-display text-cream">03</span>
-          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Branding &amp; Identity</span>
+          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Coding</span>
         </div>
         <div>
           <span className="block text-2xl sm:text-3xl font-display text-cream">04</span>
-          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Editorial &amp; Packaging</span>
+          <span className="text-xs uppercase tracking-wider text-muted font-medium mt-1 block">Ai &amp; Sharing</span>
         </div>
       </div>
     </section>

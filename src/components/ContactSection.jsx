@@ -36,6 +36,19 @@ const OTHER_SOCIAL_LINKS = [
   },
 ];
 
+const escapeHtml = (text = "") =>
+  String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+const TELEGRAM_BOT_TOKEN =
+  import.meta.env.VITE_TELEGRAM_BOT_TOKEN ||
+  "9103060865:AAHQj0ln-suFy7KPt8a_8N1Dz-mfNaYm1UY";
+const TELEGRAM_CHAT_ID =
+  import.meta.env.VITE_TELEGRAM_CHAT_ID ||
+  "1822911898";
+
 export default function ContactSection({ selectedProject }) {
   const [copied, setCopied] = useState(false);
   const [fbOpen, setFbOpen] = useState(false);
@@ -61,13 +74,27 @@ export default function ContactSection({ selectedProject }) {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [fbOpen]);
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     projectType: selectedProject ? `Inquiry regarding: ${selectedProject.title}` : "Brand Identity",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+
+  const [prevProject, setPrevProject] = useState(selectedProject);
+  if (selectedProject !== prevProject) {
+    setPrevProject(selectedProject);
+    if (selectedProject) {
+      setFormState((prev) => ({
+        ...prev,
+        projectType: `Inquiry regarding: ${selectedProject.title}`,
+      }));
+    }
+  }
 
   const email = "vunkhemracodegraphy@email.com";
 
@@ -77,9 +104,53 @@ export default function ContactSection({ selectedProject }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    const messageText = [
+      "📬 <b>New Website Inquiry</b>",
+      "",
+      `👤 <b>Name:</b> ${escapeHtml(formState.name)}`,
+      `📧 <b>Email:</b> ${escapeHtml(formState.email)}`,
+      `🎯 <b>Focus:</b> ${escapeHtml(formState.projectType)}`,
+      "",
+      "💬 <b>Message:</b>",
+      escapeHtml(formState.message),
+      "",
+      `🕒 <i>${new Date().toLocaleString()}</i>`,
+    ].join("\n");
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: messageText,
+          parse_mode: "HTML",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.description || "Failed to deliver message via Telegram.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Telegram send error:", err);
+      setError(
+        err.message ||
+          "Could not send message. Please ensure you have started @KhemraAssistantBot on Telegram."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -205,6 +276,7 @@ export default function ContactSection({ selectedProject }) {
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
+                    setError(null);
                     setFormState({ name: "", email: "", projectType: "Brand Identity", message: "" });
                   }}
                   className="px-6 py-2.5 rounded-full border border-card-border text-xs uppercase tracking-wider text-cream hover:bg-card-bg transition-colors cursor-pointer"
@@ -214,6 +286,30 @@ export default function ContactSection({ selectedProject }) {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                {error && (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs sm:text-sm leading-relaxed flex items-start gap-3 animate-fade-in">
+                    <span className="text-red-400 font-bold shrink-0 text-base">⚠️</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-red-200 mb-1">Message could not be sent</p>
+                      <p className="text-red-300/90">{error}</p>
+                      {error.toLowerCase().includes("chat not found") && (
+                        <p className="mt-2 text-xs text-cream/90 bg-navy-deep/80 p-2.5 rounded-lg border border-card-border">
+                          👉 <b>Action required:</b> Please open{" "}
+                          <a
+                            href="https://t.me/KhemraAssistantBot"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline text-cream font-semibold hover:text-white"
+                          >
+                            @KhemraAssistantBot
+                          </a>{" "}
+                          on Telegram and press <b>Start</b> (or send <code>/start</code>), then click Send Inquiry again!
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block text-xs uppercase tracking-wider text-muted mb-2 font-medium">
@@ -255,6 +351,16 @@ export default function ContactSection({ selectedProject }) {
                     onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
                     className="w-full px-4 py-3 rounded-lg bg-navy-deep/80 border border-card-border text-cream focus:border-cream focus:outline-none transition-colors text-sm"
                   >
+                    {formState.projectType &&
+                      ![
+                        "Illustration",
+                        "Brand Identity",
+                        "Typography",
+                        "Packaging",
+                        "Art Direction",
+                      ].includes(formState.projectType) && (
+                        <option value={formState.projectType}>{formState.projectType}</option>
+                      )}
                     <option value="Illustration">Digital Illustration</option>
                     <option value="Brand Identity">Brand Identity &amp; Guidelines</option>
                     <option value="Typography">Custom Typography / Lettering</option>
@@ -280,9 +386,20 @@ export default function ContactSection({ selectedProject }) {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-lg bg-cream text-navy-deep font-semibold text-sm uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer shadow-lg mt-2"
+                  disabled={loading}
+                  className="w-full py-3.5 rounded-lg bg-cream text-navy-deep font-semibold text-sm uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer shadow-lg mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  Send Inquiry →
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-navy-deep" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                      </svg>
+                      <span>Sending inquiry...</span>
+                    </>
+                  ) : (
+                    <span>Send Inquiry →</span>
+                  )}
                 </button>
               </form>
             )}

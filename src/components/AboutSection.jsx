@@ -1,11 +1,13 @@
+import ToolIcon from "./ToolIcon";
+
 export default function AboutSection() {
   const tools = [
     // "Adobe Illustrator",
     "Adobe Photoshop",
-    "Adobe InDesign",
-    // "Procreate",
+    "Capcut",
+    "Visual Studio Code",
     "Figma",
-    "Screen Printing",
+    "DaVinci Resolve",
     // "Color Theory",
     // "Art Direction",
   ];
@@ -26,7 +28,7 @@ export default function AboutSection() {
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-card-bg border border-card-border">
-              <span className="font-display text-3xl text-cream block">10+</span>
+              <span className="font-display text-3xl text-cream block">5+</span>
               <span className="text-xs uppercase tracking-wider text-muted">Featured Works</span>
             </div>
             <div className="p-4 rounded-xl bg-card-bg border border-card-border">
@@ -39,10 +41,10 @@ export default function AboutSection() {
         {/* Right Column: Bio & Toolkit */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           <p className="text-cream/90 text-lg sm:text-xl font-light leading-relaxed">
-            I am a multi-disciplinary graphic designer and illustrator passionate about marrying the discipline of Swiss typography with organic, expressive illustration.
+            Hello! I'm Vun Khemra, a passionate web developer, content creator, and lifelong learner. I enjoy coding, exploring new technologies, and sharing knowledge through digital media.
           </p>
           <p className="text-muted text-base sm:text-lg leading-relaxed">
-            Whether developing comprehensive brand identities, hand-crafted packaging labels, or vibrant digital artworks, every piece is approached with meticulous attention to color harmony, balance, and storytelling. My focus is on creating timeless visuals that elevate brands and connect deeply with audiences.
+            Currently, I'm a 2st-year student at the Royal University of Phnom Penh (RUPP), majoring in Computer Science and Engineering. I'm passionate about building modern web applications, developing my programming skills, and creating meaningful digital experiences.
           </p>
 
           {/* Toolkit */}
@@ -54,9 +56,10 @@ export default function AboutSection() {
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className="px-3.5 py-1.5 rounded-full bg-card-bg border border-card-border text-xs tracking-wider uppercase text-muted hover:text-cream hover:border-cream/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-card-bg border border-card-border text-xs tracking-wider uppercase text-muted hover:text-cream hover:border-cream/40 transition-all duration-200 group cursor-default"
                 >
-                  {tool}
+                  <ToolIcon name={tool} className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+                  <span>{tool}</span>
                 </span>
               ))}
             </div>

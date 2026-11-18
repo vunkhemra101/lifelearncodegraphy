@@ -1,5 +1,21 @@
 export default function ProjectArt({ project, className = "" }) {
-  const { id, color, title, category } = project;
+  const { id, color, title, category, image } = project;
+
+  if (image) {
+    return (
+      <div className={`relative overflow-hidden w-full aspect-[16/10] bg-navy-deep ${className}`}>
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover pointer-events-none select-none"
+          draggable={false}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent pointer-events-none" />
+        <span className="sr-only">{`${title} - ${category}`}</span>
+      </div>
+    );
+  }
 
   // Custom visual compositions per project id
   const renderArt = () => {

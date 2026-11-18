@@ -14,11 +14,14 @@ export default function Footer() {
           </span>
           <span className="hidden sm:inline text-card-border">•</span>
           <span className="text-xs text-muted">
-            Programmer &amp; videography.
+            Programmer &amp; photographer.
           </span>
         </div>
 
         <div className="flex items-center gap-6 text-xs uppercase tracking-wider text-muted">
+          <a href="#home" className="hover:text-cream transition-colors">
+            Home
+          </a>
           <a href="#about" className="hover:text-cream transition-colors">
             About
           </a>

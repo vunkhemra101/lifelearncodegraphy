@@ -123,11 +123,14 @@ export default function App() {
       <Footer />
 
       {/* Detail Modal */}
-      <ProjectModal
-        project={activeModalProject}
-        onClose={() => setActiveModalProject(null)}
-        onInquire={handleInquire}
-      />
+      {activeModalProject && (
+        <ProjectModal
+          key={activeModalProject.id}
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
+          onInquire={handleInquire}
+        />
+      )}
     </div>
   );
 }

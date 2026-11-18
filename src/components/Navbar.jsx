@@ -5,14 +5,21 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Equal 18-degree radial spacing inside the fan, comfortably below the top line
+  // Equal 14-degree radial spacing inside the fan, comfortably below the top line
   const links = [
-    { label: "About", href: "#about", angle: -16 },
-    { label: "Work", href: "#work", angle: -34 },
-    { label: "Contact", href: "#contact", angle: -52 },
+    { label: "Home", href: "#home", angle: -12 },
+    { label: "About", href: "#about", angle: -26 },
+    { label: "Work", href: "#work", angle: -40 },
+    { label: "Contact", href: "#contact", angle: -54 },
   ];
 
-  const handleClick = () => setMenuOpen(false);
+  const handleClick = (e, href) => {
+    setMenuOpen(false);
+    if (href === "#home") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -156,7 +163,7 @@ export default function Navbar() {
                 <line x1="400" y1="0" x2="275" y2="352" stroke="rgba(56, 189, 248, 0.25)" strokeWidth="0.75" />
               </svg>
 
-              {/* 2. Radially Angled Navigation Links: "About", "Work", "Contact" (Below top line, equally spaced) */}
+              {/* 2. Radially Angled Navigation Links: "Home", "About", "Work", "Contact" (Below top line, equally spaced) */}
               <nav
                 className="absolute inset-0 w-full h-full pointer-events-none select-none"
                 aria-label="Fan navigation"
@@ -174,7 +181,7 @@ export default function Navbar() {
                   >
                     <a
                       href={link.href}
-                      onClick={handleClick}
+                      onClick={(e) => handleClick(e, link.href)}
                       tabIndex={menuOpen ? 0 : -1}
                       className="pointer-events-auto pl-10 sm:pl-12 font-body font-bold text-lg sm:text-xl md:text-2xl text-cream hover:text-cyan-300 uppercase tracking-widest transition-all duration-200 hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(0,240,255,0.7)] cursor-pointer drop-shadow-md inline-block py-1"
                     >
